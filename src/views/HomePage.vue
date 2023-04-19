@@ -1,9 +1,9 @@
 <template>
-    <ToDoList />
+    <FormularioComp />
 </template>
   
 <script setup>
-  import ToDoList from "./components/ToDoList.vue"
+  import FormularioComp from "../components/FormularioComp.vue"
   
 </script>
 
