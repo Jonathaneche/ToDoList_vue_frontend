@@ -1,7 +1,7 @@
 <template>
-  <div>
-    HOLA
-  </div>
+
+
+
 </template>
 
 <script setup>

@@ -1,14 +1,14 @@
 <template>
   
-  <ToDoList />
+  <HomePage />
 </template>
 
 <script setup>
-import ToDoList from "./components/ToDoList.vue"
+import HomePage from "./views/HomePage.vue"
 
 </script>
 
 
 <style scoped>
 
-</style>
+</style>+
