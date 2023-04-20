@@ -1,35 +1,44 @@
 <template>
-    <h2>Lista de tareas</h2>
-    <form action="">
-        <input v-model="tarea" type="text" placeholder="Agrega una tarea">
-        <button v-on:submit.prevent="agregarTarea">Agregar</button>
-    </form>
+    <div>
+        <h2>Lista de tareas</h2>
+        <form @submit.prevent="agregarTarea">
+            <input v-model="nuevaTarea" type="text" placeholder="Agrega una tarea">
+            <button>Agregar</button>
+        </form>
 
-    <ul>
-        <li v-for="tarea in tareas"
-        :key="tarea.id">
-            {{ tarea }}
-          </li>
-    </ul>
-
-   
-
-
+        <ul>
+            <li v-for="tarea in tareas"
+            :key="tarea.id">
+                {{ tarea }}
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script setup>
 import { ref } from "vue"
-let tarea = ref("");
-let tareas = ref(["Jonathan", "Gorka", "jaja"]);
 
-function agregarTarea(event){
-    event.preventDefault();
-    const newTarea = tarea.current.value;
-    tareas([...tareas, newName]);
-    tareas.current.value = "";
+import { defineProps } from 'vue';
+
+
+
+let tareas = ref([]);
+let nuevaTarea = ref("");
+
+function agregarTarea(){
+    
+    const newTarea = nuevaTarea.value;
+
+    tareas.value.push(newTarea);
+    
+  return tareas;
+
 } 
 
+defineProps({
+  infoData: Object,
 
+});
 
 </script>
 
