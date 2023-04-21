@@ -4,7 +4,6 @@ import { ref } from 'vue';
 async function obtenerDatos(){
     let isLoading = true;
     let isError = false;
-
     let listaDeTareas = ref(null);
 
     try{
