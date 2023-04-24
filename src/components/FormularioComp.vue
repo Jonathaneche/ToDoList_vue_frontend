@@ -6,7 +6,7 @@
                 <form @submit.prevent>
                     <input v-model="formData.titulo" type="text" placeholder="Ej. Ir al banco">
                     <input v-model="formData.descripcion" type="text" placeholder="Ej. Estar en la oficina a las 8am ">
-                    <input v-model="formData.quien" type="text" placeholder="Gorka">
+                    <input v-model="formData.quien" type="text" placeholder="Hora">
                 </form>
             <button @click="agregarTarea">Agregar</button>
         </div> 
