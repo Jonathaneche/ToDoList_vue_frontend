@@ -1,14 +1,13 @@
 <template>
-  
   <HomePage />
 </template>
 
 <script setup>
-import HomePage from "./views/HomePage.vue"
-
+import HomePage from "./views/HomePage.vue";
 </script>
 
-
 <style scoped>
-
-</style>+
+body {
+  background-color: blue;
+}
+</style>

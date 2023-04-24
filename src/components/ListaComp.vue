@@ -8,17 +8,47 @@
                 :key="tarea.id">
                 <p><strong>Titulo:</strong> {{ tarea.titulo }}</p>
                 <p><strong>Descripcion:</strong> {{ tarea.descripcion}}</p>
-                <p><strong>Hora:</strong> {{ tarea.quien}}</p>
+                <p><strong>Hora:</strong> {{ tarea.hora}}</p>
                 <div>
-                    <button @click="editarTarea(tarea.id, tarea.quien)">Editar</button>
-                    <button @click="elimilarTarea(tarea.id)">Eliminar</button>
+                    <!-- Button trigger modal -->
+                    <button @click="editarTarea(tarea.id, tarea.titulo, tarea.descripcion, tarea.hora)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Editar
+                    </button>
+                    <button @click="elimilarTarea(tarea.id)" type="button" class="btn btn-danger">Eliminar</button>
                 </div>
             </div>
-            <div v-show="mostrarFormulario">
-                <input v-model="formTitulo" type="text" placeholder="Ej. Ir al banco">
-                <input v-model="formDescripcion" type="text" placeholder="Ej. Estar en la oficina a las 8am ">
+
+                
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar tarea</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            
+                    </div>
+                    <div class="modal-body">
+                        <input v-model="formTitulo" type="text" placeholder="Editar titulo" required>
+                            <input v-model="formDescripcion" type="text" placeholder="Editar descripcion" required>
+                            <input v-model="formhora" type="text" placeholder="Editar hora " required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button @click="actualizarBD" type="button" class="btn btn-primary">Actualizar</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+
+            <!-- <div v-show="mostrarFormulario">
+                <input v-model="formTitulo" type="text" placeholder="Editar titulo">
+                <input v-model="formDescripcion" type="text" placeholder="Editar descripcion">
+                <input v-model="formhora" type="text" placeholder="Editar hora ">
                 <button @click="actualizarBD">Actualizar</button>
-            </div>
+            </div> -->
         </div>
 
 
@@ -30,20 +60,26 @@ import { defineProps, ref } from 'vue';
 import axios from "axios";
 
 let idTarea = ref(""); 
-let quienTarea = ref("");
-let mostrarFormulario = ref(false);
+let tituloTarea = ref("");
+let descripcionTarea = ref("");
+let horaTarea = ref("");
+// let mostrarFormulario = ref(false);
 
 let formTitulo = ref("");
 let formDescripcion = ref("");
+let formhora = ref("");
 
 
-function editarTarea(id, quien){
+function editarTarea(id , titulo, descripcion, hora){
     idTarea.value = id;
-    quienTarea.value = quien;
-    mostrarFormulario.value = true;
+    tituloTarea.value = titulo;
+    descripcionTarea.value = descripcion;
+    horaTarea.value = hora;
+  
+    // mostrarFormulario.value = true;
 
     console.log("id ***", idTarea.value);
-    console.log("Quien ***", quienTarea.value);
+    
 }
 
 function actualizarBD (){
@@ -51,8 +87,12 @@ function actualizarBD (){
         axios.put(`http://localhost:3000/tareas/${idTarea.value}`, {
             titulo: formTitulo.value,
             descripcion: formDescripcion.value,
-            quien: quienTarea.value
+            hora: formhora.value
         })
+
+        if (formTitulo = "" ){
+            titulo: tituloTarea.value
+        };
         location.reload()
 
     }catch(error){
